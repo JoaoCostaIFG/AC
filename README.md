@@ -1,4 +1,4 @@
-# AC G
+# AC G26
 
 - Ana Barros - up201806593@edu.fe.up.pt
 - João Costa - up201806560@edu.fe.up.pt
