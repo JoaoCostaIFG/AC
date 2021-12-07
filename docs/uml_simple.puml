@@ -1,0 +1,38 @@
+@startuml
+
+!theme amiga
+
+hide empty members
+
+class Account  {
+}
+
+class Card {
+}
+
+class Client {
+}
+
+class Disposition {
+}
+
+class District {
+}
+
+class Loan {
+}
+
+class Transactions {
+}
+
+Loan "0..1" --  Account
+Transactions "*" -- Account
+
+District -right- Client
+Disposition -- Client
+Account -left- District
+Account -right- "1..*" Disposition
+
+Disposition -right- Card
+
+@enduml

@@ -72,14 +72,14 @@ class Transactions {
   account
 }
 
-Loan "0..1" -down- "1" Account
-Transactions "*" -right- "1" Account
+Loan "0..1" --  Account
+Transactions "*" -- Account
 
-District "1" -- "1" Client
-Disposition "1" -- "1" Client
-Account "1" -down- "1" District
-Account "1" -right- "1..*" Disposition
+District -right- Client
+Disposition -- Client
+Account -left- District
+Account -right- "1..*" Disposition
 
-Disposition -up- Card
+Disposition -right- Card
 
 @enduml
