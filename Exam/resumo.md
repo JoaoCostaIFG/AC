@@ -317,6 +317,7 @@ variability => Numa **Boxplot**, qualquer valor **fora do IRQ é um outlier**.
   - Histograms - mostrar distribuição de valores de uma variável contínua. Podem
     ser misleading em small datasets. Dependem do tamanho das bins. **Density
     estimation** para dar smooth;
+  - Cumulative Distribution Function (CDF) - CDF of a random variable.
   - QQ plots - comparação gráfica de propriedades como location, scale e
     skewness em 2 distribuiçoes. Pode ser usado para verificar visualmente a
     hipotese de uma variável seguir uma distribuição normal;
@@ -520,3 +521,508 @@ Não depende do algoritmo.
 - Podemos mudar o **kernel** => problema projetado numa higher dimension;
 - **Regularization constant, C** - trade-off entre a importância da margem e do
   erro => **soft margin** (maximize margin e minimize error).
+
+## Regression
+
+### Linear regression
+
+![Linear regression](./linear_regression.png)
+
+- Eq.: $y = f(x) = b_0 + b_1 * x$
+- $b_0$ - interseção da linha com o eixo dos y. Muitas vezes **difícil de
+  interpretar**;
+- Assume que as variáveis não estão correlated:
+  - Influência de cada variável é explicada separadamente;
+  - Coefficients não são influênciados por mudar o set de explanatory variables
+    (attributes).
+- Variação depende do grau de correlação.
+
+#### Estimar parametros
+
+$b_1$ e $b_0$ estimados.
+
+- $\widehat{b_1} = \frac{S_{XY}}{S_{XX}}$
+  - $S_{XY} = \sum [(X_i - \overline{X}) * (Y_i - \overline{Y})]$
+  - $S_{XX} = \sum (X_i - \overline{X})^2$
+  - $\widehat{b_1}$ deve ser significativamente estisticamente diferente de
+    **0**: para haver diferença (significativa) entre Y e X.
+- $\widehat{b_0} = \overline{Y} - \widehat{\beta} * \overline{X}$
+  - Pode ou não ser estatisticamente diferente de **0**;
+  - Evidencia de quando $Y \neq 0$, $X = 0$;
+  - Pode fazer sentido ser 0 => Valor de um cliente com 0 income;
+  - Ou não => vendas mínimas de um produto que não tem shelf space.
+
+#### Assumptions
+
+- Relação entre X e Y é linear (e aditiva);
+- Erros (e.g. unexplained variation in y):
+  - Independently and identically distributed;
+  - Homoscedasticity - constant variance;
+  - Normally distributed.
+
+#### Prediction and evaluation
+
+- Dado x, o modelo estima y com $\widehat{y} = b_0 + b_1 * x$
+- Mas estimativa não é perfeita;
+- **Erro** - $\widehat{y} - y$
+  - y - true value;
+  - $\widehat{y}$ - value estimated by the model.
+- **Mean error** - **não usar**;
+- **Mean absolute error** - estima erro "tipíco";
+- **Mean squared error** - dar mais peso a erros maiores;
+  - Pode ser dominado por um conjunto de pequeno de casos.
+- Erro **depende da escala** da target variable.
+
+#### Baseline
+
+![Linear Regression Baseline](./linear_regression_baseline.png)
+
+- **Modelo trivial** - $\widehat{y_i} = \overline{y}$
+  - Demos predict com a média.
+- Regressão só é útil se o erro obtido for menor que o obtido com o **modelo
+  trivial** (e.g. comparar os 2 com o **mean squared error**)
+  - $\frac{\sum (\widehat{y_i} - y_i)^2}{\sum (\overline{y} - y_i)^2}$
+  - 0 - regression model é perfeito;
+  - (0, 1) - é útil;
+  - 1 - equivalente ao modelo trivial;
+  - `>1` - pior que o modelo trivial.
+
+### Other algorithms
+
+- KNN - como para classification:
+  - Predict é o average dos target values (instead of majority voting).
+- Decision trees:
+  - Split criterio based on the sum of variances;
+  - Prediction é o average of targets in the leaf (instead of majority voting).
+- SVM:
+  - Minimizar o "tubo à volta" dos dados (em vez de maximizar a distância até ao
+    exemplo mais próximo de cada class).
+
+### Bias-variance
+
+![Bias-Variance](./regrssion_bias_var.png)
+
+- **Bias** - é o modelo que um algoritmo aprende dado um set de training data;
+- **Variance** - é um modelo que um algorithm consegue aprender com **small
+  changes** nos dados de treino;
+- **Low bias => high variance** (e vice-versa) - Low bias são menos complexos;
+- Queremos um modelo com bom trade-off (não demasiado complexo mas com bom
+  predictive power).
+
+![Bias-Variance trade-off](./bias_var_tradeoff.png)
+
+## Descriptive modeling
+
+### Similarity measure
+
+- Está relacionado com a noção de **distância entre observações**;
+- Pode ser visto como o oposto da distância;
+- Medida numérica do quão similares são 2 data objects - [0,1];
+- É mais alta quanto mais parecidos são os objetos;
+
+#### Dissimilarity measure
+
+- Quão diferentes são 2 objetos;
+- Numérico. Minimo é 0, máximo varia;
+- Pode ser expresso como uma métrica de distância, $d$, com certar propriedades:
+  - $d(x_i, x_j) >= 0$
+  - $d(x_i, x_j) = 0$ apenas se $x_i = x_j$
+  - $d(x_i, x_j) = d(x_j, x_i)$
+  - **Triangle inequality** - $d(x_i, x_j) <= d(x_i, x_k) + d(x_k, x_j)$
+- Dist. metrics:
+  - **Euclidean dist** - deixa de ser burro;
+  - **Manhattan dist** - grelha;
+  - **Minkowski/Chebyschev/Supremum dist** - distância num tabuleiro de chess.
+
+![Distance metrics](./distance_metrics.png)
+
+---
+
+- **Proximity** - refere-se a similarity ou dissimilarity.
+
+#### Heterogeneous distance functions
+
+- Distância entre 2 data objects é o sumatório das distância para cada atributo;
+- Se o attributo for categórico:
+  - 0 - $x_i^a == x_j^a$
+  - 1 - otherwise
+- Se o attributo for numérico:
+  - $\frac{|x_i^a - x_j^a|}{|max_a - min_a|}$
+
+#### General coefficient of Similarity
+
+- $s(x_i, x_j)$
+- Atributos podem ter um weight associado (entre 0 e 1);
+- $s(x_i, x_j) = 1$ se $x_i = x_j$
+- $s(x_i, x_j) = s(x_j, x_i)$
+
+### Clustering
+
+- Usa a noção de similaridade;
+- Types of methods:
+  - **Partitional** - dividir observações em k partições de acordo um critério;
+  - **Hierachical** - generar uma hierarquia de grupos, de 1 a n groups, onde n
+    é o número de linhas no data set.
+
+#### Partitional methods
+
+- Partition para k groups minimizando/maximizando um criterion;
+- Dificuldades:
+  - Selecionar o número de grupos;
+  - O número de divisões possíveis cresce muito.
+- **Cluster compactness** - o quão similares são os cases num cluster;
+- **Cluster separation** - o quão distante dos outros clusters está um cluster;
+- **Objetivo** - **minimizar intra-cluster distance** e **maximizar
+  inter-cluster distances**;
+- Clustering solution:
+  - **Hard clustering** - objeto pertence a um cluster;
+  - **Fuzzy clustering** - cada objeto tem uma probabilidade de pertencer a cada
+    cluster;
+- **Centroid** - median of the data objects in the cluster: **Sum of Squared
+  Errors (SSE)**, **L1 measure**.
+
+##### K-Means
+
+Método para obter k groups do data set.
+
+- Inicializar os centros de k grupos para um set de observations aleatórias;
+- Repeatir até os grupos ficarem estáveis:
+  - Allocate each obs to the group whose center is nearest;
+  - Re-calculate the center of each group.
+- Observações:
+  - Usar squared Euclidean distance como critério;
+  - Maximizar inter-cluster dissimilarity.
+- Advantages:
+  - Fast algorithm that scales well;
+  - Stochastic approach that frequently works well. Tende a identificar local
+    minima.
+- Disadvantages:
+  - Não garante optimal clustering;
+  - Podemos obter soluções diferentes usando starting points diferentes;
+  - O initial guess de k para o número de clusters pode estar longe do
+    verdadeiro valor ótimo de k.
+
+##### Cluster validation
+
+- Types of Evaluation measures:
+  - **Supervised** - comparar o clustering obtido com informação externa
+    disponível;
+  - **Unsupervised** - tenta medir a qualidade do clustering sem nenhuma
+    informação do clustering ideal:
+    - **Cohesion coefficients** - determinar o quão compacts/cohesive são os
+      membros de um grupo;
+    - **Separation coefficients** - determinar o quão diferentes são os membros
+      de diferentes grupos.
+
+![Cohesion Separation](./cohesion_separation.png)
+
+- **Silhouette Coefficient** (unsupervised measure):
+  - Incorpora as noções de cohesion e separation;
+  - Obter a avg. dist. para todos os objetos no mesmo grupo;
+  - Para cada outro grupo (a que objeto não pertence), calcular a avg. dist. até
+    aos membros desses grupos => obter a mínima dessas distâncias;
+  - O silhouette coefficiente, si, varia em [-1, 1].
+- Calcular o avg. silhouette coeff para vários valores de k e escolher o que dá
+  maior valor.
+
+![Silhouette Coefficient](./silhouette_coeff.png)
+
+##### Cluster validation - best number of clusters, k
+
+- Escolher mal leva a clustering mau;
+- Idealmente deviamos ter a priori knowledge da estrutura real da data;
+- Se n tivermos esse knowledge, começamos com $\sqrt{n/2}$ onde n é o número de
+  atributos;
+- **Elbow method** - Calcular the **within-cluster SSE** (**distortion**) e
+  escolher k tal que adicionar um novo cluster não dá um SSE muito menor.
+
+![Elbow method](./elbow_method.png)
+
+##### Other methods
+
+- **Partition Around Medoids (PAM)**:
+  - Procura k objetos representativos (medoid);
+  - Cada obs. é alocada ao nearest medoid (como no k-means);
+  - É mais robusto à presença de outliers por não usar averages;
+  - Usa uma métrica mais robusta para medir a clustering quality.
+- **Clustering Large Applications (CLARA)**:
+  - Vantages de PAM sobre k-means tem custo computacional => pode ser demasiado
+    para large data sets;
+  - CLARA tenta resolver isto usando sampling => trabalha em partes do data set;
+
+K-means like methods falham para os seguintes casos:
+![K-means failures](./kmeans_failure.png)
+
+- **Density-Based Spatial Clustering of Applications with Noise (DBSCAN)**:
+  - Densidade de uma obs. é estimada com o número de obs. que estão num raio
+    (paŕametro do método);
+  - **Core points** - nº de obs. no raio está acima de um threshold;
+  - **Border points** - nº de obs. não chega à threshold mas estão no raio de um
+    **core point**;
+  - **Noise points** - não tem obs. suficientes perto nem estão no raio de um
+    **core point**.
+  - **Advantages**:
+    - Lida clusters de diferentes shapes e sizes;
+    - Resistente a noise.
+  - **Disadvantages**:
+    - Varying densities;
+    - High-dimensional data.
+
+![DBSCAN](./dbscan.png)
+
+#### Hierachical clustering
+
+- Cada nível representa uma solução com x grupos;
+- User seleciona a solução que quer;
+- **Dendogram** pode ser usado para visualização.
+- **Agglomerative methods** - bottom-up:
+  - Começar com um grupo por case;
+  - Em cada upper level um par de grupos é merged em um;
+  - Escolhemos os pares mais similares.
+- **Divisive methods** - top-down (much less used):
+  - Start with a single group;
+  - Em cada nível cada grupo foi dividido em 2;
+  - O grupo selecionado é o com **smallest uniformity**.
+
+##### Agglomerative methods
+
+1. Computar proximity matrix;
+2. Let each point be a cluster;
+3. Repetir até só termos 1 cluster:
+
+- juntar os clusters mais próximos;
+- recalcular a matriz.
+
+![Example of agglomerative method](./aggl_eg.png)
+
+##### Similarity metrics
+
+![Hierachical clustering metrics](./hierach_cluster_metrics.png)
+
+Várias métricas de similaridade alternativas dão glusters alternativas.
+
+- Single-link:
+  - Can handle non-elliptical shapes;
+  - Uses a local mege criterion;
+  - Distant parts of the cluster and clusters' overall structure are not taken
+    into account.
+- Complete-link:
+  - Biased towards globular clusters;
+  - Uses a non-local merge criterion;
+  - Chooses the pair of clusters whose merge has the smallest diameter;
+  - The similarity of 2 clusters é a similaridade dos seus membros menos
+    similares;
+  - Sensível a noise/outliers.
+- Average-link:
+  - Trade-off entre single e complete link.
+
+##### Divisive methods
+
+1. Computar proximity matrix;
+2. Começar com um cluster que contem todos os pontos;
+3. Repetir até termos 1 cluster por data point:
+
+- Escolher o cluster com maior diametro (maior dissimilarity entre 2 pontos);
+- Selecionar o ponto com maior dissimilarity com os outros pontos no cluster;
+- Relocar pontos para o novo cluster ou para o antigo dependendo se estão mais
+  perto do ponto selecionado ou do centro do cluster.
+
+## Association rules
+
+- **Support** - measure the importance of a set:
+  - Percentage of transactions _t_ containing the set _S_;
+  - **Absolute support** - number of transactions _t_ containing the set _S_;
+  - {sugar, flour, eggs}.
+- **Confidence** - measures the strength of the rule:
+  - Percentage of transactions _t_ that having sugar and flower also have eggs;
+  - {sugar, flour} -> {eggs}.
+
+### Basic concepts
+
+- _I_ - set dos items;
+- _t_ - uma transaction é um subset de items - t C= I;
+- Dataset contem transactions;
+- **Association rule** - `X -> Y`:
+  - X e Y são transactions;
+  - X != 0, Y != 0, e X ∩ Y = 0;
+- **Support** - sup(X -> Y) = sup(X ∪ Y);
+- **Confidence** - conf(X -> Y) = sup(X ∪ Y)/sup(X)
+
+### Mining association rules
+
+- _minsup_ - um minimal support;
+- _minconf_ - minimal confidence;
+- Queremos obter todas as association rules tal que o `support >= minsup` e
+  `confidence >= minconf`.
+
+#### Apriori algorithm
+
+- **_Passo 1_** - Frequent itemset generation - itemsets com
+  `support >= minsup`;
+  - **Self-Join step** - Gerar novos k-itemsets baseado nos datasets frequentes
+    (k-1)-itemsets da geração anterior.
+  - **Prune step** - Elimina alguns dos k-itemsets candidatos (support-based
+    pruning strategy).
+- **_Passo 2_** - Rule generation - gerar todas as confident association rules
+  from the frequent itemsets - rules with `confidence >= minconf`.
+  - Gerar todos os subsets nao vazios, _s_, para cada itemset frequente _I_;
+  - Para cada subset, _s_, computar a confidence `(I - s) -> s`;
+  - Seleciona as regras com `confidence > minconf`.
+- **Problem** - há um número muito grande de itemsets candidatos.
+- **Downward Closure Property**:
+  - Todos os subsets de um itemset frequente são frequentes;
+  - Todos os supersets de um itemset frequente são frequentes.
+- **Apriori Pruning Principle** - se um itemset está abaixo do _minsup_,
+  discartamos todos os seus supersets;
+
+Mover um item do **antecedente para o consequente**, **nunca muda o support** e
+**nunca aumenta a confidence**.
+
+### Compact representation of itemsets
+
+![Compact itemsets](./compact_itemset.png)
+
+- **Closed frequent itemset** - frequent itemset que não tem um frequent
+  superset com o mesmo support;
+- **Maximal frequent itemset** - frequent itemset para o qual não existe um
+  superset frequent;
+- A partir de maximal itemsets, é possível derival todos os frequent itemsets
+  computando todas as interseções não vazias;
+- O set de todos os closed itemsets preserva o conhecimento sobre os supports de
+  todos os frequent itemsets;
+- **Reduzir nº de regras:**
+  - Mudar o _minsup_ e/ou o _minconf_;
+  - Restringir items;
+  - Representar subsets de rules como 1 só;
+  - Filtrar regras.
+  - **Improvement** - é a diferença mínima entra a confiança de uma regra e a
+    confiança de uma das suas simplicações diretas. E.g.
+    `improv(AB->C) = min({conf(AB->C) - conf(A->C) | A C AB})`
+  - **Interesting rule** - **unexpected** (supreendente para o utilizador) e
+    **useful**.
+
+#### Rule interest
+
+- **Subjective measures** - based on user's belief in the data. Hard to
+  incorporate in the pattern discovery task;
+- **Objective measures** - based on facts, statistics and structures of
+  patterns. Independente do domínio considerado;
+- Tipicamente, `A->B` é **interesting** se A e B não são estisticamente
+  independentes;
+- `A->B` pode ter high support e confidence e continuar a não ser interessante;
+- Uma regra é unexpected as it deviates from independence (e.g. lift,
+  conviction, $x^2$, correlation...);
+- High confidence rules podem ser misleading.
+
+![Deceitful rule example](./high_confidence_rules.png)
+
+- **Lift** - ration entre confidence da regra e o support do item no consequent:
+  - `= 1` - A e B são independentes;
+  - `< 1` - A e B são negatively correlated;
+  - `> 1` - A e B são positively correlated;
+  - Mede o desvio da regra;
+  - `lift(A->B) = lift(B->A)`
+- **Conviction** - sensível a rule direction - `A -> !B`:
+  - Tenta medir o nível de implicação de uma regra;
+  - $conviction(A->B) = \frac{1 - sup(b)}{1 - conf(A->B)}$
+  - `1` => indica independencia entre A e B;
+  - Um valor alto significa que a **conviction** depende muito do antecedente;
+  - Aumenta muito quando a confidence se aproxima de 1.
+
+## Introduction to recommender systems
+
+### Definition
+
+- Given:
+  - User model - ratings, preferences, demographics, situational context;
+  - Items - with or without description of item characteristics.
+- Find:
+  - Relevance score;
+  - Typically used for ranking.
+
+### Collaborative filtering
+
+#### Pure CF approach
+
+- Input - matrix of given user-item ratings;
+- Output - o quanto um user vai/não vai gostar de um certo item. Um top-N list
+  de items recomendados.
+
+#### User-based nearest-neighbor CF
+
+- Encontrar um set de users que gostam e deram rate a um item _i_;
+- Combinar os seus ratings para dar prefict se o novo user vai gostar do item
+  _i_ (e.g. average);
+- Repetir para todos os items que o novo user ainda não viu => recomendar os
+  best-rated.
+- **Assumption:**
+  - Se users tinham tastes similares no passado, vão continuar a ter agora;
+  - Preferencias mantêm-se estáveis e consistentes ao longo do tempo.
+
+---
+
+- **No-free-lunch Theorem** - não há um algortimo melhor que os outros todos
+  porque on average têm a mesma performance.
+
+### Metrics
+
+- As mesmas de PRI => Precision, Recall, amoigos;
+- **Rank Score:**
+  - Extends the recall metric to take the position of correct items in a ranked
+    list into account;
+  - O ratio dos Rank Score dos items corretos para os theorectical best Rank
+    Score achievable pelo user.
+- **Discounted cumulative gain (DCG)** - logarithmic reduction factor:
+  - Dar rank a resultados de 1 a 5 (maior é mais relevante);
+  - Ter highly relevant documents no início da lista.
+- **Idealized discounted cumulative gain (IDCG):**
+  - Assumption that items are ordered by decresing relevance.
+- **Normalized discounted cumulative gain (nDCG):**
+  - Intervalo [0, 1];
+  - DCG/IDCG.
+
+### Metrics para rating de prediction
+
+- **Mean Absolute Error (MAE do Davide)** - deviation entre predicted ratings e
+  actual ratings;
+- **Root Mean Square Error (RMSE)** - similar com MAE mas dá mais enfase a
+  larger deviation.
+
+### Ratings: explicit vs implicit
+
+- **Explicit** - é mais preciso e permite separar diferentes aspetos do rated
+  object. Users não gostam tho;
+- **Implicit** - é facil de coletar porque é transparent para o user. Nem todas
+  as ações do user são interpretadas corretamente (e.g. posso comprar um livro
+  que não gosto para oferecer a alguém).
+
+![Meaning of an unknown](./significado_de_unknown.png)
+
+---
+
+### Data sparsity
+
+- Dataset in RS is very sparse => que percentagem dos productos do Amazon são
+  comprados por um utilizador comum?
+- **Cold start problem:**
+  - Que items recomendar a novos users?
+  - Como recomendar novos items?
+    - Forçar users a dar rate a um set de items;
+    - No início usar método não baseado em rating => CF;
+    - **Default voting** - dar default value a items que só 1 de 2 users a ser
+      comparados deram rate.
+
+### Memory-based and model-based approach
+
+- User-based CF is a memory-based approach:
+  - The rating matrix is directly used to find neighbors/make predictions;
+  - Does not scale for most real-world scenarios.
+- Model-based approaches:
+  - Based on an offline pre-processing or "model-learning phase";
+  - At run-time, only the learned model is used to make predictions;
+  - Models are updated/re-trained periodically.
+  - **Matrix factorization:**
+    - Matrixes podem ser decompostas num produto de 3 matrixes;
+    - Matriz do meio são os **singular values**;
+    - Full matrix can be approximated by observing only the most important
+      features => **singular values**.
