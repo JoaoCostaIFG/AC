@@ -30,7 +30,7 @@
 - Tool neutral;
 - Captura experiencia para poder ser reutilizado.
 
-![CRISP-DM](./crisp_dm.png)
+![CRISP-DM](img/crisp_dm.png)
 
 ## Evaluate predictions
 
@@ -73,7 +73,7 @@
 - Um modelo demasiado ajustado a dados de treino está overfitted => geralmente
   tem má generalização;
 
-![DT Overfitting](./dt_overfit.png)
+![DT Overfitting](img/dt_overfit.png)
 
 - Training error vai ser baixando, mas a partir de certo ponto, e de test
   aumenta.
@@ -171,7 +171,7 @@
 - E.g. mesma pessoa com múltiplos emails;
 - Por vezes é desejável manter duplicados => oversampling.
 
-### inconsistent or incorrect data
+### Inconsistent or incorrect data
 
 - Hard to detect => depende de domain knowledge;
 - E.g. 4/11/2000 = Nov. 4th or April 11th?
@@ -295,10 +295,10 @@ variability => Numa **Boxplot**, qualquer valor **fora do IRQ é um outlier**.
 - **Correlation matrix** - correlação entre cada par de valores numéricos => a
   **influência da magnitude é removida**.
   - **Pearson Correlation Coefficient** - [-1, +1] - mede a correlação linear
-    entre 2 variáveis. ![Person](./pearson.png)
+    entre 2 variáveis. ![Person](img/pearson.png)
   - **Spearman Rank-Order Correlation Coefficient** - [-1, +1] - mede a força e
     direção da associação monotonica entre 2 variáveis. Variáveis podem estar
-    relacionadas sem ser linearmente. ![Spearman](./spearman.png)
+    relacionadas sem ser linearmente. ![Spearman](img/spearman.png)
 
 ### Data Visualization
 
@@ -322,7 +322,7 @@ variability => Numa **Boxplot**, qualquer valor **fora do IRQ é um outlier**.
     skewness em 2 distribuiçoes. Pode ser usado para verificar visualmente a
     hipotese de uma variável seguir uma distribuição normal;
   - Boxplot - sumario da distribuição da variavel. Relacionadas com IQR.
-    ![Boxplot](./boxplot.png).
+    ![Boxplot](img/boxplot.png).
 
 #### Bivariate
 
@@ -370,7 +370,7 @@ resultados analíticos**;
 - **Irrelevant attributes** - não contêm info útil. E.g. ID's de alunos não
   ajudam a prever GPA.
 
-![Feature selection](./feature_selection.png)
+![Feature selection](img/feature_selection.png)
 
 ### Filter methods
 
@@ -391,7 +391,7 @@ resultados analíticos**;
 - **Solutions:**
   - Collect more data;
   - Resample existing data - undersampling ou oversampling.
-    ![Resampling](./resampling.png);
+    ![Resampling](img/resampling.png);
   - Create synthetic data - **SMOTE** + **ADASYN**. Devemos split primeiro;
   - Adaptar learning algorithm - cost sensitive learning.
 
@@ -445,7 +445,7 @@ Não depende do algoritmo.
   - Slow para big datasets;
   - Funciona melhor para real valued dataset.
 
-![NNC](./nn.png)
+![NNC](img/nn.png)
 
 #### KNN algorithm
 
@@ -455,7 +455,7 @@ Não depende do algoritmo.
 
 ### Decision Tree classifier
 
-![DT](./dt.png)
+![DT](img/dt.png)
 
 - Overfitting the train data:
   - Too many branches (refletem anomalias relacionadas com noise ou outliers);
@@ -476,7 +476,7 @@ Não depende do algoritmo.
 
 - More reliable with more data.
 
-![Dist class](./dist_class.png)
+![Dist class](img/dist_class.png)
 
 ### Naive Bayes classifier
 
@@ -490,7 +490,8 @@ Não depende do algoritmo.
   - Fast - traino e classificacao;
   - Não é sensível a atributos irrelevantes;
   - Funciona real e discrete data;
-  - Handles streaming data well.
+  - Handles streaming data well;
+  - No hiper-parametros.
 - **Desvantagens:**
   - Assume independencia de features.
 
@@ -502,7 +503,7 @@ Não depende do algoritmo.
   e **constraints**;
 - **Kernel trick** => non-linear models;
 
-![SVM](./svm.png)
+![SVM](img/svm.png)
 
 - Basta olhar para os pontos que definem a fronteira => o resto é irrelevante;
 - **Vantagens:**
@@ -526,7 +527,7 @@ Não depende do algoritmo.
 
 ### Linear regression
 
-![Linear regression](./linear_regression.png)
+![Linear regression](img/linear_regression.png)
 
 - Eq.: $y = f(x) = b_0 + b_1 * x$
 - $b_0$ - interseção da linha com o eixo dos y. Muitas vezes **difícil de
@@ -575,7 +576,7 @@ $b_1$ e $b_0$ estimados.
 
 #### Baseline
 
-![Linear Regression Baseline](./linear_regression_baseline.png)
+![Linear Regression Baseline](img/linear_regression_baseline.png)
 
 - **Modelo trivial** - $\widehat{y_i} = \overline{y}$
   - Demos predict com a média.
@@ -600,7 +601,7 @@ $b_1$ e $b_0$ estimados.
 
 ### Bias-variance
 
-![Bias-Variance](./regrssion_bias_var.png)
+![Bias-Variance](img/regrssion_bias_var.png)
 
 - **Bias** - é o modelo que um algoritmo aprende dado um set de training data;
 - **Variance** - é um modelo que um algorithm consegue aprender com **small
@@ -609,7 +610,7 @@ $b_1$ e $b_0$ estimados.
 - Queremos um modelo com bom trade-off (não demasiado complexo mas com bom
   predictive power).
 
-![Bias-Variance trade-off](./bias_var_tradeoff.png)
+![Bias-Variance trade-off](img/bias_var_tradeoff.png)
 
 ## Descriptive modeling
 
@@ -634,7 +635,7 @@ $b_1$ e $b_0$ estimados.
   - **Manhattan dist** - grelha;
   - **Minkowski/Chebyschev/Supremum dist** - distância num tabuleiro de chess.
 
-![Distance metrics](./distance_metrics.png)
+![Distance metrics](img/distance_metrics.png)
 
 ---
 
@@ -714,7 +715,7 @@ Método para obter k groups do data set.
     - **Separation coefficients** - determinar o quão diferentes são os membros
       de diferentes grupos.
 
-![Cohesion Separation](./cohesion_separation.png)
+![Cohesion Separation](img/cohesion_separation.png)
 
 - **Silhouette Coefficient** (unsupervised measure):
   - Incorpora as noções de cohesion e separation;
@@ -725,7 +726,7 @@ Método para obter k groups do data set.
 - Calcular o avg. silhouette coeff para vários valores de k e escolher o que dá
   maior valor.
 
-![Silhouette Coefficient](./silhouette_coeff.png)
+![Silhouette Coefficient](img/silhouette_coeff.png)
 
 ##### Cluster validation - best number of clusters, k
 
@@ -736,7 +737,7 @@ Método para obter k groups do data set.
 - **Elbow method** - Calcular the **within-cluster SSE** (**distortion**) e
   escolher k tal que adicionar um novo cluster não dá um SSE muito menor.
 
-![Elbow method](./elbow_method.png)
+![Elbow method](img/elbow_method.png)
 
 ##### Other methods
 
@@ -751,11 +752,11 @@ Método para obter k groups do data set.
   - CLARA tenta resolver isto usando sampling => trabalha em partes do data set;
 
 K-means like methods falham para os seguintes casos:
-![K-means failures](./kmeans_failure.png)
+![K-means failures](img/kmeans_failure.png)
 
 - **Density-Based Spatial Clustering of Applications with Noise (DBSCAN)**:
   - Densidade de uma obs. é estimada com o número de obs. que estão num raio
-    (paŕametro do método);
+    (parámetro do método);
   - **Core points** - nº de obs. no raio está acima de um threshold;
   - **Border points** - nº de obs. não chega à threshold mas estão no raio de um
     **core point**;
@@ -768,7 +769,7 @@ K-means like methods falham para os seguintes casos:
     - Varying densities;
     - High-dimensional data.
 
-![DBSCAN](./dbscan.png)
+![DBSCAN](img/dbscan.png)
 
 #### Hierachical clustering
 
@@ -793,11 +794,11 @@ K-means like methods falham para os seguintes casos:
 - juntar os clusters mais próximos;
 - recalcular a matriz.
 
-![Example of agglomerative method](./aggl_eg.png)
+![Example of agglomerative method](img/aggl_eg.png)
 
 ##### Similarity metrics
 
-![Hierachical clustering metrics](./hierach_cluster_metrics.png)
+![Hierachical clustering metrics](img/hierach_cluster_metrics.png)
 
 Várias métricas de similaridade alternativas dão glusters alternativas.
 
@@ -844,9 +845,9 @@ Várias métricas de similaridade alternativas dão glusters alternativas.
 - Dataset contem transactions;
 - **Association rule** - `X -> Y`:
   - X e Y são transactions;
-  - X != 0, Y != 0, e X ∩ Y = 0;
-- **Support** - sup(X -> Y) = sup(X ∪ Y);
-- **Confidence** - conf(X -> Y) = sup(X ∪ Y)/sup(X)
+  - X != 0, Y != 0, e $X \cap Y = 0$;
+- **Support** - $sup(X \rightarrow Y) = sup(X \cup Y)$;
+- **Confidence** - $conf(X \rightarrow Y) = sup(X \cup Y)/sup(X)$.
 
 ### Mining association rules
 
@@ -880,7 +881,7 @@ Mover um item do **antecedente para o consequente**, **nunca muda o support** e
 
 ### Compact representation of itemsets
 
-![Compact itemsets](./compact_itemset.png)
+![Compact itemsets](img/compact_itemset.png)
 
 - **Closed frequent itemset** - frequent itemset que não tem um frequent
   superset com o mesmo support;
@@ -914,7 +915,7 @@ Mover um item do **antecedente para o consequente**, **nunca muda o support** e
   conviction, $x^2$, correlation...);
 - High confidence rules podem ser misleading.
 
-![Deceitful rule example](./high_confidence_rules.png)
+![Deceitful rule example](img/high_confidence_rules.png)
 
 - **Lift** - ration entre confidence da regra e o support do item no consequent:
   - `= 1` - A e B são independentes;
@@ -924,7 +925,7 @@ Mover um item do **antecedente para o consequente**, **nunca muda o support** e
   - `lift(A->B) = lift(B->A)`
 - **Conviction** - sensível a rule direction - `A -> !B`:
   - Tenta medir o nível de implicação de uma regra;
-  - $conviction(A->B) = \frac{1 - sup(b)}{1 - conf(A->B)}$
+  - $conviction(A \rightarrow B) = \frac{1 - sup(b)}{1 - conf(A \rightarrow B)}$
   - `1` => indica independencia entre A e B;
   - Um valor alto significa que a **conviction** depende muito do antecedente;
   - Aumenta muito quando a confidence se aproxima de 1.
@@ -996,7 +997,7 @@ Mover um item do **antecedente para o consequente**, **nunca muda o support** e
   as ações do user são interpretadas corretamente (e.g. posso comprar um livro
   que não gosto para oferecer a alguém).
 
-![Meaning of an unknown](./significado_de_unknown.png)
+![Meaning of an unknown](img/significado_de_unknown.png)
 
 ---
 
@@ -1026,3 +1027,529 @@ Mover um item do **antecedente para o consequente**, **nunca muda o support** e
     - Matriz do meio são os **singular values**;
     - Full matrix can be approximated by observing only the most important
       features => **singular values**.
+
+## Outlier detection
+
+- Most data mining tasks querem extrair info sobre os padrões "normais" (o que é
+  comum/frequente) da data;
+- No entanto, **rare patterns** podem ser os mais importantes/críticos em certos
+  domínios;
+- **Outlier** - observação que desvia tanto das outras observações a ponto de se
+  tornar suspeito:
+  - Padrões que não conformam com um definição de normal bem definida;
+  - Inicialmente eram considerados erros => removidos;
+  - Hoje em dia, representam informação crítica => trigger preventive/corrective
+    actions.
+
+### Outliers and Anomalies
+
+- Outlier e Anomaly detection são roughly related;
+- Outliers têm negative connotation => associados a data noise;
+- Anomalies são associadas a data estranha que devia ser investigada (para
+  identificar a causa);
+- Anomaly pode ser considerada outlier;
+- Outlier não é necessáriamente uma anomaly;
+- **Meaningful outliers** - outliers que podem ser vistos como anomalies.
+
+### Exemplos de aplicações
+
+- Quality control and fault detection applications - quality control, fault
+  detection and systems diagnosis, structure defect detection...
+- Financial applications - credit card fraud, insurance claim fraud...
+- Intrusion and Security applications - host-based intrusions...
+- Web log analytics;
+- Market basket analysis - outlier transactions in association patterns;
+- Medical applications - medical sensor/imaging diagnostics.
+
+### Challenges of outlier detection
+
+- Definir todos os possiveis "normal" behaviours é difícil;
+- A boundary entre normal e outlier é pouco precisa
+- Definição de outlier depende do domain;
+- É difícil distringuir **meaningful outliers** de simple random noise;
+- Outlier behaviour evolui com o tempo. E.g. malicious actions adaptam-se para
+  parecerem normais;
+- Inherent lack de labeled outliers para trining/validation de modelos.
+
+### Key aspects of outlier detection problem
+
+#### Nature of Input Data
+
+- Cada data instance tem 1 (univariate) ou mais atributos (multivariate);
+- Relação entre data instances: none, sequencial/temporal, spatial,
+  spatio-temporal, graph;
+- Dimensionality of data.
+
+#### Types of outliers
+
+- **Point (or Global) outlier** - uma instância ou pequeno grupo que é muito
+  diferente do resto das instâncias;
+- **Contextual outlier** - uma instâncias que quando considerada num contexto é
+  muito diferente das restantes;
+- **Collective outlier** - uma instância que individualmente pode não ser um
+  outlier, mas quando inspecionada em conjunto com instâncias relacionadas e
+  respeitando o dataset total, é um outlier.
+
+![Types of outliers](./img/types_outliers.png)
+
+#### Intended output
+
+- Dar uma label/value => identificar normal ou outlier instance;
+- Dar um score - probabilidade de ser outlier:
+  - Permite output ser ranked;
+  - Requer especificar um threshold.
+
+#### Learning task
+
+- **Unsupervised Outlier Detection** - caso mais comum:
+  - Dataset não tem informação sobre o comportamento de cada instância;
+  - Assume que instâncias com comportamento normal são muito mais comuns.
+- **Semi-supervised Outlier Detection:**
+  - Dataset tem **poucas** instâncias de normal ou outlier behaviour;
+  - E.g. fault detection.
+- **Supervised Outlier Detection:**
+  - Dataset tem instâncias de normal e outlier behaviour;
+  - Difícil obter data assim em real-life applications.
+
+#### Performance metrics
+
+- Metricas de performance standard (e.g. accuracy, error rate) assumem que todas
+  as instâncias são igualmente relevantes para a performance do modelo;
+- Estas métricas dariam um boa estimativa de performace para um model que
+  funciona bem em normal (frequent) cases e mal em outlier (rare) cases.
+
+![Outlier Perf Bad](img/outlier_perf_bad.png)
+
+### Outlier detection approaches
+
+![Outlier detection methods](img/outlier_detection_tech.png)
+
+#### Unsupervised learning techniques
+
+- **Statistical-based outlier detection:**
+  - **Proposal** - todos os pontos que satifazem um statistical discordance test
+    para um modelo são outliers;
+  - **Advantages** - Se as assumptions do modelo forem verdade, estas tecnicas
+    dão uma solução justificável para outlier detection. O score é associado ao
+    confidence interval;
+  - **Disadvantages** - A data nem sempre segue um modelo estatistíco. Escolher
+    a melhor hypothesis não é straightforward. Capturar interações entre
+    atributos nem sempre é possível. Estimar parámetros para alguns modelos
+    estatisticos é difícil;
+  - **Techniques** - Parametric (Grubbs' Test + Boxplot + Mahalanobis
+    distance) + Non-parametric (Histograms + Kernel functions).
+- **Proximity-based outlier detection:**
+  - **Proposal** - normal instances occur in dense neighborhoods, while outlier
+    occur far from their closest neighbors;
+  - **Advantages** - Purely data driven technique. Não assume nada sobre a
+    distribuição da data;
+  - **Disadvantages** - Dificil distinguir true outlier e low-density noisy
+    regions. Métodos têm de combinar global e local analysis. In high
+    dimensional data, o contrast de distâncias é perdido. Computacionalmente
+    complexo;
+  - **Techniques** - Distance-base (euclidean distance) + Density-based (LOF);
+  - Distance based techs não são boas a lidar com regiões de densidades
+    diferentes => density-based têm em conta a densidade à volta de um outlier.
+
+![Outlier dist dens](img/outlier_dist_dens.png)
+
+- **Clustering-based outlier detection:**
+  - **Proposal** - Normal instances estão em clusters grandes e densos. Outliers
+    são instances que não pertencem a nenhum dos clusters/estão longe do cluster
+    mais próximo/formam clusters muito pequenos de densidade baixa;
+  - **Advantages** - Easily adaptable to on-line/incremental mode. Test phase is
+    fast;
+  - **Disadvantages** - Training phase pesada. Se normal points não criarem
+    clusters, esta técnica pode falhar. In high dimensional spaces, clustering
+    algorithms may not give any meaningful clusters. Algumas tecnicas detetam
+    outlies como by-product => não estão focadas nessa tarefa;
+  - **Techniques** - DBSCAN + FindCBLOF + $OR_H$.
+- **Isolation Forest** - deteta outliers puramente através do conceito de
+  isolamento (sem medidas de distância ou densidade):
+  - **Isolation** - separar uma instância do resto das instâncias;
+  - **1st (training)** - criar um ensemble de random binary decision tree
+    (isolation trees) usando sub-samples da training set;
+  - **2nd (evaluation)** - passa as instâncias de teste pelas isolation trees
+    para um obter um outlier score para cada instância;
+  - **Score** - é a average path length. Outliers têm maior chance de ficar
+    isolados junto à root. Normal points ficam isolados nos deeper levels;
+  - **Advantages** - No distance/density measures. Elimina custo computacional
+    do cálculo de distâncias. Scales up to handle extremely large data size and
+    high-dimensional problems with a large number of irrelevant attributes;
+  - **Disadvantages** - Hyperparameters têm de ser tuned. Runs diferentes podem
+    dar resultados diferentes (randomness component). Large sample sizes may
+    cause masking or swamping.
+
+![iForest](img/iforst.png)
+
+#### Semi-supervised learning techniques
+
+- **One class classification:**
+  - **Proposal** - Construir um prediction model para o comportamento normal e
+    classificar todos os desvios como outliers;
+  - **Advantages** - Modelos são interpretáveis. Normal behaviour pode ser
+    aprendido accurately. Pode detetar novos outliers que não aparecem perto de
+    outros outliers no treino;
+  - **Disadvantages** - Precisa de labels de normal/outlier. Possivelmente alto
+    false alarm rate (dados normais não vistos em treino podem ser classificados
+    como outliers);
+  - **Techniques** - Auto-associative neural network + One-class SVM.
+
+### Contextual outlier detection
+
+- **Proposal** - se uma data instance é um outlier num dado contexto (mas não
+  otherwise), então é um **contextual outlier**;
+- Cada instancia é definida usando 2 sets de atributos:
+  - **Contextual attributes** - usados para determinar o contexto (vizinhança)
+    da instância:
+    - Sequential context - position + time;
+    - Spatial context - latitude + longitude;
+    - Graph context - weights + edges.
+  - **Behavioural attributes** - which define the non-contextual characteristics
+    of an instance.
+- O comportamento dos outliers é determinado usando os behavioural attributes de
+  um contexto específico;
+- **Advantages:**
+  - Permite uma definição natural de outlier em muitas real-life applications;
+  - Detects outliers that are hard to detect when analysed in the global
+    context.
+- **Disadvantages:**
+  - Temos de identificar um set de bons contextual attributes;
+  - Assume que todas as instâncias normais num contexto serão similares (em
+    termos de behavioural attributes), enquanto outliers são diferentes.
+- **Techniques:**
+  - Reduction to point outlier detection;
+  - Utilizing structure in data.
+
+### Collective outlier detection
+
+- **Proposal** - se uma coleção de instâncias relacionadas é anómala em todo o
+  data set => **collective outlier**. As instâncias podem não ser outliers por
+  si só mas a sua ocorrência junta é anómala;
+- **Advantages:** - Permite uma definição natual de outlier em real-life
+  applications em que as data instances estão relacionadas;
+- **Disadvantages:**
+  - Contrary to contextual outlier, structures are often not explicitly defined
+    => have to be discovered;
+  - Precisa de extrair features examinando estrutura do dataset;
+  - Exploração de estruturas na data tipicamente usa heuristicas => application
+    dependent;
+  - Computational cost is high.
+- **Techniques:**
+  - Pode ser um **contextual outlier** se analisado num contexto;
+  - Podem ser transformado num **contextual outlier** detection problem ao
+    incorporar info do contexto.
+
+### Outlier detection in High Dimensionality Data
+
+- **Challenges:**
+  - Interpretation of outliers;
+  - Data sparsity;
+  - Data subspaces;
+  - Scalable with respect to dimensionality.
+- **Techniques:**
+  - Find distance-based outliers, mas usar ranks de dist em vez de abs dist de
+    outlier detection;
+  - **Dimensionality reduction** - the principal components with low variance
+    are preferred, because normal objects are likely close to each other and
+    outliers often deviate from the majority;
+  - Projetar data em vários subspaces para encontrar area onde densidade é muito
+    mais baixa que a average;
+  - Desenvolver novos modelos para high-dimensional outliers directly.
+
+## Artificial Neural Networks (ANN)
+
+- Set de unidades (**neurons**) conectadas. Estas conecções têm um **weights**;
+- Cada unit tem um activation level;
+- Algumas units estão conectadas ao mundo exterior => existem **input e output
+  neurons**;
+- Leaning em ANNs => update dos weights das conecções.
+
+### Artificial neuron
+
+![ANN](img/ANN.png)
+
+1. Linear combination dos inputs: $€_i = \sum_j{w_{ji} * a_j + b}$
+2. Uma (tipicamente) não-linear activation function: $a_i = g(in_i)$
+
+#### Activation functions
+
+- Determinam o output de um nó na neural network:
+  - linear;
+  - non-linear - mais comuns porque **permitem o modelo generalizar/adaptar**
+    com variedade de data.
+
+![Activation functions](img/activation_functions.png)
+
+### Perceptron
+
+Networks com uma input e uma output layer.
+
+![Simplest Perceptron](img/simplest_perceptron.png)
+
+- A linear classifier for binary classification:
+  - 1 se $w * x + w_0 > 0$
+  - 0 otherwise.
+- Aprende atualizando weights através da delta rule com leaning rate $n$;
+- $w_i(t + 1) = w_i(t) + n(true - predicted)x_i$
+
+![Perceptrons are limited to linearly separable functions](img/perceptron_lin.png)
+
+### Types of ANNs
+
+#### Feed-forwards network (multilayer perceptrons)
+
+- Network unidirecionais (conecções de input para output) e sem ciclos;
+- Cada unidade só se conecta a unidades da camada seguinte;
+- Unidades de uma layer nunca fazem conecções até unidades da layer anterior.
+
+![Feed Forward](img/feed_forward.png)
+
+![Example of a Feed Forward (g is the activation function)](img/example_feed_forward.png)
+
+### Recurrent networks
+
+- Networks com conecções arbitrárias;
+- **Feedback effects** causam possível instabilidade e comportamento caótico;
+- Usualmente demoram mais tempo a convergir.
+
+![Recurrent Network](img/recurrent_network.png)
+
+### Backpropagation algorithm (mais popular)
+
+- Similar ao usado em perceptron networks;
+- **Intuition:**
+  - Cada unidade é responsável por uma fração do erro nos nós de output a que
+    está conectada;
+  - O erro é dividido de acordo com os pesos da conecção entre as hidden e
+    output units respetivas => **propagating the errors backwards**.
+- Computa o gradient em **weight space** de uma feedforwards neural network de
+  acordo com a **loss function**;
+- **Algoritmo:**
+  - Inicializar weights (small random values);
+  - Para cada exemplo no training set, até convergir (todos os exemplos são
+    classificados corretamente ou satisfazemos o stopping criterion) fazer:
+    - **Predict** output;
+    - Calcular o **prediction error** com a **loss function**;
+    - Computar $\delta_h$ para todos os weights desde a hidden layer até à
+      output layer;
+    - Computar $\delta_i$ para todos os weights deste da input layer até a
+      hidden layer;
+    - Update dos network weights.
+
+#### Gradient descent
+
+- **Stochastic gradient descent** - instead of calculating the gradient of the
+  full function (dataset completo), we update the weights one example at a time;
+- **Batch gradient descent** - batch size é o número de sub samples dadas à
+  network apõs a qual o weight update acontece;
+- Ambos são mais efetivos a **escapar de local minima**.
+
+#### Stopping criteria
+
+- **Too early** => risco de network ainda n trained;
+- **Too late** => perigo de overfitting (adjustment to noise in the data).
+- Maximum number of iterations;
+- Error based on the training set: erro no training set estar abaixo de um certo
+  limite;
+- Error based on validation set (independente do training set): erro no
+  validation set chegou a um minimo.
+
+### Issues
+
+- Nº de nós na hidden layer:
+  - **Few nodes** => underfitting;
+  - **Many nodes** => overfitting;
+  - **Não há critério** para definir nº de nós na hidden layer.
+- Effect of learning rate (size of the steps to obtain the direction of maximum
+  descent):
+  - **Small** => higher learning times;
+  - **High** => pode não convergir.
+
+![Learning rate](img/learning_rate.png)
+
+- Generalization vs. Specialization trade-off:
+  - **Optimal nº of hidden neurons:**
+    - Too many hidden neurons => overfitting (training set is memorized),
+      network useless em novos data sets;
+    - Not enough hidden neurons => network unable to learn problem concept.
+  - **Overtraining** - too many examples. The ANN memorizes the examples instead
+    of the general idea.
+
+### Hyperparameters
+
+- **Network structure:** nº de layers, nº de neurons em cada layer, weights
+  initialization, activation function;
+- **Training algorithm:** learning rate, nº de epochs (**iterations**), early
+  stopping criterion, weight decay (**regularization**).
+
+### Tips
+
+- Features com distribuiçoes de valores muito diferentes não são convenientes
+  (dadas as tipical activation functions);
+- Missing values em input features podem set representados como **0** => não
+  influencia o training process;
+- Output em multiclass setting:
+  - Use one-hot encoding, there are M output neurons (1 per class);
+  - For each case, the class with the highest probability value.
+- Weights inicias random na gama [-0.05, 0.05];
+- Shuffle the training set entre epochs;
+- Learning rate deve começar com um high value que decresce progressivamente;
+- Treinar a network várias vezes usando initialization weights diferentes.
+
+### Wrap-up
+
+- Input is high-dimensional discrete or real-valued;
+- Output is discrete or real value:
+  - **Classification** - use Softmax func as activation func in output layer to
+    compute the prob para as classes;
+  - **Regression** - use a linear function as activation func in output layer.
+- Output é um vector de vals;
+- Possibly noisy data;
+- Form of target function is unknown;
+- Human readability of result is unimportant.
+
+### Pros
+
+- Telerance of noisy data;
+- Ability to classify patterns on which they have not been trained;
+- Successful on a wide range of real-world problems;
+- Algorithms are inherently parallel.
+
+### Cons
+
+- Long training times;
+- Resulting models are essentially black boxes.
+
+## Deep learning - Convolution Neural Networks (CNN)
+
+- Múltiplas hidden layers;
+- Feedforward neural networks;
+- Neurons typically use ReLU or sigmoid activation funcs;
+- Weight multiplication are replaced by convolution (filters);
+- Pode set aplicado a raw signal (sem computar ad hoc features) => features are
+  learnt automatically.
+
+### Convolution
+
+![Convolution](img/convolution.png)
+
+- Segunda matriz é um **filtro**;
+- **Filtro** é overlapped para cada pos da primeira matriz;
+
+![Convolution 2](img/convolution_2.png)
+
+### The good
+
+- Reduced amount of parameters to learn (local features);
+- More efficiente than dense multiplication;
+- Specifically thought for images or data with grid-like topology;
+- Convolution layers are equivariant to translation;
+
+### The bad
+
+- Não resolve todos os problemas/não o melhor para todos os problemas;
+- Difficult to select best architecture for a problem;
+- Require new training for each task/configuration;
+- Requer um training set muito grande;
+- Não se sabe pk funciona bem => unstable contra adversarial examples.
+
+## Ensemble
+
+- Multiple models (**base models**) obtidos por aplicar um learning process a um
+  problema;
+- Modelos são combinados para fazer prediction (tentam melhorar model quality).
+
+### Vantagens
+
+- **Accuracy** - majority compensa erros individuais;
+- **Diversity is key** - Individual models specialize in different areas do data
+  space.
+
+### Desvantagens
+
+- **Complexity:**
+  - Understanding global model;
+  - Explaining decisions;
+  - Computationally expensive.
+- **Occam's Razor:**
+  - De **entre hipoteses de uma prediction**, escolher a que faz menos
+    assumptions;
+  - Simplicity leads to greater accuracy;
+  - Identificar o melhor modelo requer identificar a proper "model complexity".
+
+### Types of ensembles - gerar models
+
+- **Homogeneous** - single induction algorithm;
+- **Heterogeneous** - multiple induction algorithms.
+
+### Types of ensembles - combine models
+
+- **Regression:** **avg**, **weighted avg**, sum, weighted sum, product,
+  maximum, minimum, median;
+- **Classification:** **majority voting**, **weighted majority voting**, borda
+  count;
+- **Borda count:**
+  - Base models rank candidates in order of preference;
+  - Points assigned to eahc position;
+  - Prefiction is class with more points.
+
+### Bagging
+
+- Dividir dataset em partes;
+- Cada classificador é treinado com uma parte do dataset;
+- **Prediction** - average/majority;
+- **Vantagens:**
+  - **Accuracy** - oftern significativamente melhor que um único classifier;
+  - Robust to noise.
+- **Desvantagens:**
+  - **Unstable classifier** - changes pequenos na training data pode levar a
+    major decision changes. E.g. dt e nn;
+
+### Boosting
+
+- Treinar um modelo $M_1$;
+- Ver os exemplos mal predicted e dar-lhes mais weight ao treinar modelo
+  $M_{i + 1}$;
+- Prediction é um agregar dar predictions dos vários modelos **dando mais peso
+  aos modelos baseado na sua accuracy**.
+- **Prediction** - weighted vote;
+- **Vantages:**
+  - Independent sampling (vs. error-dependent sampling do bagging);
+  - Uniform aggregation (vs. weighted aggregation do bagging);
+  - => Costuma ter melhor accuracy.
+- **Desvantagens:**
+  - Risk de overfitting do modelo para misclassified data.
+
+### Random forest
+
+- Treinar k modelos com um random subset dos features originais para gerar cada
+  árvore;
+- **Prediction** - average/majority;
+- RF vs Adaboost:
+  - Comparable em accuracy;
+  - Mais robusto a erros e outliers.
+- RF vs Bagging & adaboost:
+  - RF é insensível ao número de atributos selecionados para cada split;
+  - Faster.
+
+### Negative correlation learning
+
+- Treinar k modelos para minimizar a **error function** do ensemble:
+  - Adiciona à error function uma penalty com o avg error dos modelos já
+    treinados.
+- **Prediction** - average;
+- Apenas em regression - algoritmos que tentam minimizar/maximizar uma função
+  objetivo (e.g. nn, svr);
+- Modelos negativamente correlacionados com o avg err dos modelos anteriores.
+
+## Metalearning and autoML
+
+- **Many models** - podemos chegar ao ponto de ter um prediction model para cada
+  cliente;
+- Bias no dataset e learning algortimo => nem todos os algoritmos conseguem
+  fazer tudo. **Bias-free learning is futile**;
+- **Bias** é o critério para preferir um modelo a outro;
+- **Metalearning** - metadata (meta atributos) para selecionar melhor algortimo;
+- **Responsible AI** - Promoting fair models => sacrifice predictive
+  performance.
