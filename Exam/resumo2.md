@@ -5,7 +5,11 @@
 - Processo de identificar implicit, valid, novel (medido comparando com expected
   values), potentially useful (leva a ações uteis) and understandable;
 - Encontrar padrões na data;
-- **Task:** predict sales volume based on historical data.
+- **Tasks:**
+  - **Mining de padrões, associations, correlations, clusters**;
+  - **Classification & prediction & outliers**;
+  - **Evaluation**;
+  - E.g. predict sales volume based on historical data.
 
 ## Predictive task
 
@@ -329,7 +333,8 @@ resultados analíticos**;
   - Em High-dimensional space é mais provável um problema ser linearmente
     separável do que em low-dimensional space.
 - **Regularization constant, C** - trade-off entre a importância da margem e do
-  erro => **soft margin** (maximize margin e minimize error).
+  erro => **soft margin** (maximize margin e minimize error);
+- Aumentar C e gamma pode levar a **overfitting**.
 
 ![SVM](img/svm.png)
 
