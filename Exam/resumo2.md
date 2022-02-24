@@ -19,7 +19,7 @@
 
 1. Feature extraction;
 2. Data cleaning;
-3. Data transaction;
+3. Data transformation;
 4. Feature engineering;
 5. Data and dimensionality reduction.
 
@@ -44,7 +44,7 @@
   - Não há nada de sistemático sobre eles;
   - E.g. lab value de uma sample mal processada.
 - **Missing at Random (MAR)**:
-  - Relacionados com data observada (não com a não observada);
+  - Relacionados com data observada;
   - Pode haver algo sistemático sobre ele;
   - E.g. missing income value may depende on age.
 - **Missing Not at Random (MNAR)**:
@@ -57,7 +57,9 @@
     forma robusta com missing values;
   - **Make estimates (Imputation)** - Usar um método para gerar um valor para o
     que falta. E.g. mean, mode, baseado noutros atributos, modelos ML. Pode
-    introduzir **bias que afetem o resultado**.
+    introduzir **bias que afetem o resultado**:
+    - Mean, Median para numéricos;
+    - Mode para categóricos.
 
 ### Incorrect values
 
@@ -549,7 +551,7 @@ K-means like methods falham para os seguintes casos:
   - Lida clusters de diferentes shapes e sizes;
   - Resistente a noise.
 - **Disadvantages**:
-  - Varying densities;
+  - Não dá handle a varying densities;
   - High-dimensional data.
 
 ![DBSCAN](img/dbscan.png)
@@ -639,7 +641,7 @@ Cada nível representa uma solução com x grupos.
 
 - **Support** - importância de um set - $sup(X \rightarrow Y) = sup(X \cup Y)$;
 - **Confidence** - strength de um rule -
-  $conf(X \rightarrow Y) = sup(X \cup Y)/sup(X)$.
+  $conf(X \rightarrow Y) = sup(X \cup Y)/sup(X)$;
 - Mover um item do **antecedente para o consequente**, **nunca muda o support**
   e **nunca aumenta a confidence**;
 - Em geral, maior confidence => menor support (more specific rules).
@@ -902,7 +904,7 @@ Cada nível representa uma solução com x grupos.
   - Se normal points não criarem clusters, esta técnica pode falhar;
   - In high dimensional spaces, clustering algorithms may not give any
     meaningful clusters;
-  - Algumas tecnicas detetam outlies como by-product => não estão focadas nessa
+  - Algumas técnicas detetam outlies como by-product => não estão focadas nessa
     tarefa.
 
 #### Isolation Forest
@@ -1089,7 +1091,7 @@ Networks com uma input e uma output layer.
 - Output em multiclass setting:
   - Use one-hot encoding, there are M output neurons (1 per class);
   - For each case, the class with the highest probability value.
-- Weights inicias random na gama [-0.05, 0.05];
+- Weights iniciais random na gama [-0.05, 0.05];
 - Shuffle the training set entre epochs;
 - Learning rate deve começar com um high value que decresce progressivamente;
 - Treinar a network várias vezes usando initialization weights diferentes.
